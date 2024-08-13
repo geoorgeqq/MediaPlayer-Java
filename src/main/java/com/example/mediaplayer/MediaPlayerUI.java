@@ -1,15 +1,20 @@
 package com.example.mediaplayer;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.awt.event.KeyAdapter;
 
 public class MediaPlayerUI extends Application {
 
@@ -20,6 +25,7 @@ public class MediaPlayerUI extends Application {
         songs.add("Tzanca Uraganu - Vorba Francezului.mp3,file:Vorba-Francezului.jpg");
         songs.add("Gangsta Rap - Nigga Nigga Nigga.mp3,file:Gangsta-Rap.jpg");
 
+        layout.setTop(songs.getSearchField());
         layout.setCenter(songs.changeImage());
         VBox container = new VBox(5);
         ProgressBar progressBar = new ProgressBar(0);
@@ -58,6 +64,15 @@ public class MediaPlayerUI extends Application {
             songs.getMediaPlayer().play();
             songs.getTime(progressBar);
         }));
+
+        songs.getSearchField().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                if(e.getCode().equals(KeyCode.ENTER)){
+                    layout.setCenter(songs.changeImage(songs.searchItem()));
+                }
+            }
+        });
 
         layout.setBottom(container);
         Scene view = new Scene(layout);
