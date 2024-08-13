@@ -1,6 +1,5 @@
 package com.example.mediaplayer;
 
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,13 +11,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-
-
 public class MediaPlayerUI extends Application {
 
-    public void start(Stage window){
-        int i = 0;
-        Songs songs = new Songs(i);
+    public void start(Stage window) {
+        Songs songs = new Songs();
         BorderPane layout  = new BorderPane();
         songs.add("Travis Scott - Backyard.mp3,file:Rodeo.jpg");
         songs.add("Tzanca Uraganu - Vorba Francezului.mp3,file:Vorba-Francezului.jpg");
@@ -43,9 +39,8 @@ public class MediaPlayerUI extends Application {
             if(songs.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)){
                 songs.getMediaPlayer().pause();
             }
+
             songs.getTime(progressBar);
-
-
         }));
 
         nextButton.setOnAction((actionEvent -> {
@@ -54,9 +49,7 @@ public class MediaPlayerUI extends Application {
             songs.changeMediaPlayer();
             songs.getMediaPlayer().play();
             songs.getTime(progressBar);
-        }
-                ));
-
+        }));
 
         prevButton.setOnAction((actionEvent -> {
             songs.modifyIndex("-");
@@ -65,14 +58,11 @@ public class MediaPlayerUI extends Application {
             songs.getMediaPlayer().play();
             songs.getTime(progressBar);
         }));
-        
 
         layout.setBottom(container);
         Scene view = new Scene(layout);
 
         window.setScene(view);
         window.show();
-
     }
-
 }
