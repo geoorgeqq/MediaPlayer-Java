@@ -31,9 +31,9 @@ public class MediaPlayerUI extends Application {
         progressBar.setPrefWidth(250);
 
         HBox buttonsContainer = new HBox(5);
-        Button prevButton = new Button("⏮️");
-        Button nextButton = new Button("⏭️");
-        Button playButton = new Button("▶️");
+        Button prevButton = new Button("⏮");
+        Button nextButton = new Button("⏭");
+        Button playButton = new Button("⏯");
         buttonsContainer.getChildren().addAll(prevButton,playButton,nextButton);
         buttonsContainer.setAlignment(Pos.CENTER);
         container.getChildren().addAll(progressBar,buttonsContainer);
