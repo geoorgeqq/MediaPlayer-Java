@@ -8,12 +8,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Songs {
-    private ArrayList<String> songs = new ArrayList<>();
+    private ArrayList<Pair> songs = new ArrayList<>();
+    private Pair <String, String> songsPair;
     private String mediaPath;
     private String photoPath = "";
     private Media media;
@@ -31,7 +33,7 @@ public class Songs {
     public int searchItem() {
         for (int i = 0; i < songs.size(); i++) {
             String searched = searchField.getText();
-            if (songs.get(i).split(",")[0].toLowerCase().contains(searched)) {
+            if (songs.get(i).getKey().toString().toLowerCase().contains(searched)) {
                 this.changeMediaPlayer(i);
                 this.getMediaPlayer().play();
                 this.getTime(progressBar);
@@ -45,17 +47,18 @@ public class Songs {
         return this.searchField;
     }
 
-    public void add(String song) {
-        songs.add(song);
+    public void add(String songPath, String songPhotoPath) {
+        Pair<String,String> pair = new Pair<>(songPath,songPhotoPath);
+        songs.add(pair);
     }
 
     public String getSongName(int i) {
-        this.mediaPath = Paths.get(songs.get(i).split(",")[0]).toUri().toString();
+        this.mediaPath = Paths.get(songs.get(i).getKey().toString()).toUri().toString();
         return this.mediaPath;
     }
 
     public String getSongName() {
-        this.mediaPath = Paths.get(songs.get(this.index).split(",")[0]).toUri().toString();
+        this.mediaPath = Paths.get(songs.get(this.index).getKey().toString()).toUri().toString();
         return this.mediaPath;
     }
 
@@ -72,13 +75,13 @@ public class Songs {
     }
 
     public String getSongPhoto() {
-        this.photoPath = songs.get(this.index).split(",")[1];
+        this.photoPath = songs.get(this.index).getValue().toString();
         return this.photoPath;
 
     }
 
     public String getSongPhoto(int i) {
-        this.photoPath = songs.get(i).split(",")[1];
+        this.photoPath = songs.get(i).getValue().toString();
         return this.photoPath;
 
     }

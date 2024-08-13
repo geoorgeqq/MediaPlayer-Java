@@ -19,9 +19,9 @@ public class MediaPlayerUI extends Application {
     public void start(Stage window) {
         Songs songs = new Songs();
         BorderPane layout  = new BorderPane();
-        songs.add("Travis Scott - Backyard.mp3,file:Rodeo.jpg");
-        songs.add("Tzanca Uraganu - Vorba Francezului.mp3,file:Vorba-Francezului.jpg");
-        songs.add("Aries - April 18.mp3,file:ariesphoto.jpg");
+        songs.add("Travis Scott - Backyard.mp3","file:Rodeo.jpg");
+        songs.add("Tzanca Uraganu - Vorba Francezului.mp3","file:Vorba-Francezului.jpg");
+        songs.add("Aries - April 18.mp3","file:ariesphoto.jpg");
 
         layout.setTop(songs.getSearchField());
         layout.setCenter(songs.changeImage());
@@ -43,7 +43,6 @@ public class MediaPlayerUI extends Application {
             if(songs.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)){
                 songs.getMediaPlayer().pause();
             }
-
             songs.getTime(progressBar);
         }));
 
@@ -66,6 +65,7 @@ public class MediaPlayerUI extends Application {
         songs.getSearchField().setOnKeyPressed(e -> {
             if(e.getCode().equals(KeyCode.ENTER)){
                 layout.setCenter(songs.changeImage(songs.searchItem()));
+                songs.getTime(progressBar);
             }
         });
 
