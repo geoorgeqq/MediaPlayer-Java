@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Songs {
     private ArrayList<Pair> songs = new ArrayList<>();
-    private Pair <String, String> songsPair;
+    private Pair<String, String> songsPair;
     private String mediaPath;
     private String photoPath = "";
     private Media media;
@@ -32,6 +32,7 @@ public class Songs {
 
     public int searchItem() {
         for (int i = 0; i < songs.size(); i++) {
+            this.index = i;
             String searched = searchField.getText();
             if (songs.get(i).getKey().toString().toLowerCase().contains(searched)) {
                 this.changeMediaPlayer(i);
@@ -48,7 +49,7 @@ public class Songs {
     }
 
     public void add(String songPath, String songPhotoPath) {
-        Pair<String,String> pair = new Pair<>(songPath,songPhotoPath);
+        Pair<String, String> pair = new Pair<>(songPath, songPhotoPath);
         songs.add(pair);
     }
 
