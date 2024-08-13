@@ -14,8 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.awt.event.KeyAdapter;
-
 public class MediaPlayerUI extends Application {
 
     public void start(Stage window) {
@@ -23,7 +21,7 @@ public class MediaPlayerUI extends Application {
         BorderPane layout  = new BorderPane();
         songs.add("Travis Scott - Backyard.mp3,file:Rodeo.jpg");
         songs.add("Tzanca Uraganu - Vorba Francezului.mp3,file:Vorba-Francezului.jpg");
-        songs.add("Gangsta Rap - Nigga Nigga Nigga.mp3,file:Gangsta-Rap.jpg");
+        songs.add("Aries - April 18.mp3,file:ariesphoto.jpg");
 
         layout.setTop(songs.getSearchField());
         layout.setCenter(songs.changeImage());
@@ -65,12 +63,9 @@ public class MediaPlayerUI extends Application {
             songs.getTime(progressBar);
         }));
 
-        songs.getSearchField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                if(e.getCode().equals(KeyCode.ENTER)){
-                    layout.setCenter(songs.changeImage(songs.searchItem()));
-                }
+        songs.getSearchField().setOnKeyPressed(e -> {
+            if(e.getCode().equals(KeyCode.ENTER)){
+                layout.setCenter(songs.changeImage(songs.searchItem()));
             }
         });
 
